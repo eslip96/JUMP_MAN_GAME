@@ -256,13 +256,51 @@
 # print(my_list)
 # What is printed?
 
-nba_teams = {
-    'LAL': 'Los Angeles Lakers',
-    'CHI': 'Chicago Bulls',
-    'GSW': 'Golden State Warriors',
-    'BOS': 'Boston Celtics',
-    'PHX': 'Phoenix Suns',
-    'HOU': 'Houston Rockets',
-    'DAL': 'Dallas Mavericks',
-    'DEN': 'Denver Nuggets'
+# nba_teams = {
+#     'LAL': 'Los Angeles Lakers',
+#     'CHI': 'Chicago Bulls',
+#     'GSW': 'Golden State Warriors',
+#     'BOS': 'Boston Celtics',
+#     'PHX': 'Phoenix Suns',
+#     'HOU': 'Houston Rockets',
+#     'DAL': 'Dallas Mavericks',
+#     'DEN': 'Denver Nuggets'
+# }
+
+
+teams = {
+    "LA": "Lakers",
+    "NYC": "Yankees",
+    "CHI": "Bulls",
+    "SAC": "kings",
+    "SAN": "Spurs"
 }
+
+
+while True:
+
+    print("\nCurrent Teams:")
+    for location, mascot in teams.items():
+        print(f"{location}: {mascot}")
+
+    teams_edit = input("\nWhat would you like to do next? (A)dd, (R)emove, (Q)uit: ").upper()
+
+    if teams_edit == 'Q':
+        print("Goodbye!")
+        break
+    elif teams_edit == 'A':
+
+        location = input("Enter the location of the team(please abbreviete location): ")
+        mascot = input("Enter the mascot of the team: ")
+        teams[location] = mascot
+        print(f"Added team: {location} {mascot}")
+    elif teams_edit == 'R':
+
+        location = input("Enter the location of the team to remove: ").upper()
+        if location in teams:
+            del teams[location]
+            print(f"Removed team: {location}")
+        else:
+            print(f"No team found at location: {location}")
+    else:
+        print("Invalid choice. Please choose the following A, R, or Q.")
