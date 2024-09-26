@@ -139,5 +139,4 @@ pygame.display.flip()
 pygame.time.wait(3000)
 
 
-# Quit
 pygame.quit()
