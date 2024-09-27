@@ -268,39 +268,80 @@
 # }
 
 
-teams = {
-    "LA": "Lakers",
-    "NYC": "Yankees",
-    "CHI": "Bulls",
-    "SAC": "kings",
-    "SAN": "Spurs"
-}
+# teams = {
+#     "LA": "Lakers",
+#     "NYC": "Yankees",
+#     "CHI": "Bulls",
+#     "SAC": "kings",
+#     "SAN": "Spurs"
+# }
 
 
-while True:
+# while True:
+#     print()
+#     print("*"*50)
+#     print(("*" * 5)+" WELCOME TO THE NBA ROSTER MACHINE " + ("*" * 5))
+#     print("*"*50)
+#     print()
+#     print("\nCurrent Teams:")
+#     for location, mascot in teams.items():
+#         print(f"{location}: {mascot}")
 
-    print("\nCurrent Teams:")
-    for location, mascot in teams.items():
-        print(f"{location}: {mascot}")
+#     print()
+#     print(("*" * 3)+" IF YOU DONT BEILIEVE IN YOURSELF NOBODY ELSE WILL " + ("*" * 3))
+#     print((" " * 18) + "-KOBE BRYANT")
+#     print("*"*57)
+#     teams_edit = input("\nWhat would you like to do next? (A)dd, (R)emove, (Q)uit: ").upper()
 
-    teams_edit = input("\nWhat would you like to do next? (A)dd, (R)emove, (Q)uit: ").upper()
+#     if teams_edit == 'Q':
+#         print("Goodbye!")
+#         break
+#     elif teams_edit == 'A':
 
-    if teams_edit == 'Q':
-        print("Goodbye!")
-        break
-    elif teams_edit == 'A':
+#         location = input("Enter the location of the team (please abbreviete location): ").upper()
+#         mascot = input("Enter team mascot: ")
+#         teams[location] = mascot
+#         print(f"Added team: {location} {mascot}")
+#     elif teams_edit == 'R':
 
-        location = input("Enter the location of the team(please abbreviete location): ")
-        mascot = input("Enter the mascot of the team: ")
-        teams[location] = mascot
-        print(f"Added team: {location} {mascot}")
-    elif teams_edit == 'R':
+#         location = input("Enter team location: ").upper()
+#         if location in teams:
+#             del teams[location]
+#             print(f"Removed team: {location}")
+#         else:
+#             print(f"No team found at location: {location}")
+#     else:
+#         print("Invalid choice. Please choose the following A, R, or Q.")
 
-        location = input("Enter the location of the team to remove: ").upper()
-        if location in teams:
-            del teams[location]
-            print(f"Removed team: {location}")
-        else:
-            print(f"No team found at location: {location}")
-    else:
-        print("Invalid choice. Please choose the following A, R, or Q.")
+
+# def times_and_log(a, b, c):
+#     total = a * b + c
+#     print(f"{a} times {b} + {c} is {total}")
+
+
+# times_and_log(4, 3, 5)
+
+def max_funct(numbers):
+    return max(numbers)
+
+
+result = max_funct([5, 8, 2, 3])
+
+print(result)
+
+
+def max_value(numbers):
+
+    max_value = numbers[0]
+
+    for number in numbers:
+
+        if number > max_value:
+            max_value = number
+
+    return max_value
+
+
+result = max_value([5, 8, 2, 3])
+
+print(result)
