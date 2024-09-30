@@ -321,27 +321,63 @@
 
 # times_and_log(4, 3, 5)
 
-def max_funct(numbers):
-    return max(numbers)
+# def max_funct(numbers):
+#     return max(numbers)
 
 
-result = max_funct([5, 8, 2, 3])
+# result = max_funct([5, 8, 2, 3])
 
-print(result)
-
-
-def max_value(numbers):
-
-    max_value = numbers[0]
-
-    for number in numbers:
-
-        if number > max_value:
-            max_value = number
-
-    return max_value
+# print(result)
 
 
-result = max_value([5, 8, 2, 3])
+# def max_value(numbers):
 
-print(result)
+#     max_value = numbers[0]
+
+#     for number in numbers:
+
+#         if number > max_value:
+#             max_value = number
+
+#     return max_value
+
+
+# result = max_value([5, 8, 2, 3])
+
+# print(result)
+
+
+def is_leap_year(year):
+    if year < 1752:
+        raise ValueError("Please provide a year after 1752.")
+    if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
+        print(True)
+    else:
+        print(False)
+
+
+year = int(input("Enter a year to see if its a leap year: "))
+
+
+is_leap_year(year)
+
+
+def print_month_calendar(month, year, start_day_of_week, days_in_month):
+
+    print(f"{' ' * 6}{month} {year}\n")
+
+    days_of_the_week = (' ' * 2) + "S" + (' ' * 2) + "M" + (' ' * 2) + "T" + (' ' * 2) + "W" + (' ' * 2) + "T" + (' ' * 2) + "F" + (' ' * 2) + "S\n"
+    print(days_of_the_week)
+
+    print(" " * (start_day_of_week * 5), end='')
+
+    for x in range(1, days_in_month + 1):
+        print(f"{x:3}", end='')
+
+        if (x + start_day_of_week) % 7 == 0:
+            print("\n")
+
+    print("\n")
+
+
+print_month_calendar("OCT", 1996, 0, 31)
