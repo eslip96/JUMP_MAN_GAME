@@ -76,10 +76,47 @@
 #     print(new_file.read())
 
 
-with open("numb_loop.txt", 'w') as num_file:
-    for x in range(1, 11):
-        num_file.write(f'{x}\n')
+# with open("numb_loop.txt", 'w') as num_file:
+#     for x in range(1, 11):
+#         num_file.write(f'{x}\n')
 
 
-with open('numb_loop.txt', 'r') as num_files:
-    print(num_files.read())
+# with open('numb_loop.txt', 'r') as num_files:
+#     print(num_files.read())
+
+
+def print_menu():
+    print("\n(P)rint the shopping list\n(A)dd an item\n(C)lear the list\n(Q)uit")
+
+
+def print_list():
+    try:
+        items = open("list.txt").readlines()
+        if items:
+            print("\nYour shopping list:") or print(*items, sep='')
+        else:
+            print("\nThere are 0 items in your shopping list")
+    except:
+        print("\nThere are 0 items in your shopping list")
+
+
+def add_item():
+    while (item := input("\nAdd item ('Return' to menu): ").strip()) != "":
+        open("list.txt", "a").write(item + "\n"), print(f'"{item}" added')
+
+
+def clear_list():
+    open("list.txt", "w").close(), print("\nYour shopping list has been cleared")
+
+
+try:
+    open("list.txt").close()
+except:
+    open("list.txt", "w").close()
+
+print("Welcome to your shopping list program!")
+print(print_menu())
+while (choice := input("\n" or print_menu() or "Choose: ").lower()) != "q":
+    {"p": print_list, "a": add_item, "c": clear_list}.get(choice, lambda: print("\nInvalid option"))()
+
+print("\nExiting, your shopping list is saved.")
