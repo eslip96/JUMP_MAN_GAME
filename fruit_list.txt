@@ -1,1 +1,6 @@
-HAHAH YOU CANT READ WHAT I WROTE BEFORE
+File contains:
+Apple
+Banana
+Orange
+Apricot
+Grape
