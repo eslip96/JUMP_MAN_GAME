@@ -137,7 +137,7 @@ def Div_bin():
     bin_2 = input("Enter binary divisor: ")
 
     if bin_2 == "0":
-        print("Error: Division by 0")
+        print("Division by 0")
         return
 
     end_num = "0"
