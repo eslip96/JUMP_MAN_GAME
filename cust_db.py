@@ -1,8 +1,26 @@
 import sqlite3
 
-# Connect to the database
 conn = sqlite3.connect("dp_customers.db")
 cursor = conn.cursor()
+
+
+def create_table():
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS customers (
+        customer_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        address TEXT,
+        city TEXT,
+        state TEXT,
+        zipcode TEXT,
+        phone TEXT,
+        email TEXT
+    );
+    """)
+    conn.commit()
+
+
+create_table()
 
 
 def view_all_customers():
@@ -13,7 +31,7 @@ def view_all_customers():
         print("ID Name             City     State Phone      Email")
         for row in rows:
             print(f"{row[0]:<2} {row[1]:<16} {row[2]:<8} {row[3]:<5} {row[4]:<10} {row[5]}")
-        customer_id = input("\nEnter a Customer ID to View a Customer (Press 'Enter' to return to Main Menu): ")
+        customer_id = input("\nEnter Customer ID to View a Customer. Press 'Enter' to return to Main Menu: ")
         if customer_id:
             view_customer_detail(customer_id)
     else:
@@ -30,15 +48,15 @@ def search_customers():
         for row in rows:
             print(f"{row[0]:<2} {row[1]:<16} {row[2]:<8} {row[3]:<5} {row[4]:<10} {row[5]}")
     else:
-        print("\nNo matching customers found.")
-    input("(Press 'Enter' to return to Main Menu)")
+        print("\nNo matching customers")
+    input("Press 'Enter' to return to Main Menu")
 
 
 def view_customer_detail(customer_id):
     cursor.execute("SELECT * FROM customers WHERE customer_id = ?", (customer_id,))
     customer = cursor.fetchone()
     if customer:
-        print("\n+++ Customer Detail +++")
+        print("\n*** Customer Details ***")
         print(f"ID:      {customer[0]}")
         print(f"Name:    {customer[1]}")
         print(f"Address: {customer[2]}")
@@ -48,7 +66,7 @@ def view_customer_detail(customer_id):
         print(f"Phone:   {customer[6]}")
         print(f"Email:   {customer[7]}")
 
-        action = input("\nTo update a field, enter the first letter of the field.\nTo delete this record, type 'DELETE'.\nTo return to the main menu, press 'Enter'.\n>>> ")
+        action = input("\nTo update a field, enter the first letter of the field.\nTo delete this record, type 'DELETE'.\nTo return to the main menu, press 'Enter'.\n")
         if action.lower() == 'd':
             delete_customer(customer_id)
         elif action.lower() in ['n', 'a', 'c', 's', 'z', 'p', 'e']:
@@ -72,7 +90,7 @@ def add_new_customer():
         (name, address, city, state, zipcode, phone, email),
     )
     conn.commit()
-    print(f"\nSUCCESS: Customer \"{name}\" Successfully added!")
+    print(f"\nCustomer \"{name}\" added!")
 
 
 def update_customer_field(customer_id, field):
@@ -96,14 +114,18 @@ def update_customer_field(customer_id, field):
 
 def delete_customer(customer_id):
     cursor.execute("SELECT name FROM customers WHERE customer_id = ?", (customer_id,))
-    customer_name = cursor.fetchone()[0]
-    confirm = input(f"Are you SURE you want to DELETE Customer {customer_id}:\"{customer_name}\" (Y/N)? ")
-    if confirm.lower() == 'y':
-        cursor.execute("DELETE FROM customers WHERE customer_id = ?", (customer_id,))
-        conn.commit()
-        print(f"\nSUCCESS: Customer \"{customer_name}\" successfully Deleted!")
+    customer = cursor.fetchone()
+    if customer:
+        customer_name = customer[0]
+        confirm = input(f"Are you SURE you want to DELETE Customer {customer_id}: \"{customer_name}\"? (Y/N): ")
+        if confirm.lower() == 'y':
+            cursor.execute("DELETE FROM customers WHERE customer_id = ?", (customer_id,))
+            conn.commit()
+            print(f"\nCustomer \"{customer_name}\" has been deleted!")
+        else:
+            print("\nDeletion canceled.")
     else:
-        print("\nDeletion canceled.")
+        print(f"\nNo customer found with ID: {customer_id}.")
 
 
 def main():
@@ -112,6 +134,7 @@ def main():
         print("\n[1] View All Customers")
         print("[2] Search Customers")
         print("[3] Add a New Customer")
+        print("[4] Delete a Customer")
         print("[Q] Quit")
 
         choice = input("\n>>> ").lower()
@@ -121,6 +144,12 @@ def main():
             search_customers()
         elif choice == '3':
             add_new_customer()
+        elif choice == '4':
+            customer_id = input("\nEnter the Customer ID to delete: ")
+            if customer_id.isdigit():
+                delete_customer(customer_id)
+            else:
+                print("\nInvalid input. Please enter a valid Customer ID.")
         elif choice == 'q':
             print("\nGoodbye!")
             break

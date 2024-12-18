@@ -1,0 +1,10 @@
+CREATE TABLE IF NOT EXISTS customers (
+    customer_id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL,
+    address TEXT,
+    city TEXT,
+    state TEXT,
+    zipcode TEXT,
+    phone TEXT,
+    email TEXT
+);
