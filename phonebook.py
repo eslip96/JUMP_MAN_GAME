@@ -89,7 +89,7 @@ def create_database():
 
     connection.commit()
     connection.close()
-    print("DB'friends_phonebook.db' created with data!")
+    print("DB'friends_phonebook.db' created!")
 
 
 create_database()
